@@ -1,0 +1,5 @@
+rootProject.name = 'demo-event'
+include 'app-admin'
+include 'conf-api'
+include 'api-gateway'
+
