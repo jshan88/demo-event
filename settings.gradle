@@ -4,4 +4,6 @@ include 'conf-api'
 include 'api-gateway'
 include 'auth-service'
 include 'clients-feign'
+include 'kafka-producer'
+include 'kafka-consumer'
 

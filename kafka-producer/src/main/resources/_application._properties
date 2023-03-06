@@ -1,0 +1,36 @@
+server.port=8082
+
+### kafka servers (default port : 9092)
+spring.kafka.bootstrap-servers=3.38.245.89:9092,113.209.64.167:9092,3.35.14.124:9092
+###,localhost:9094,localhost:9095
+
+### connsumer group id
+spring.kafka.consumer.group-id=testgroup1
+
+### Topic Name
+spring.kafka.template.default-topic=test-topic1
+
+### consumer? ??? ???? message ??
+# 1MB ? ?????, 1000? ???? ???? ??? 10? ?? ????
+spring.kafka.consumer.max-poll-records=500
+spring.kafka.consumer.fetch-min-size=1MB
+spring.kafka.consumer.fetch-max-wait=5s
+
+### kafka offset ?? ????? ??
+spring.kafka.consumer.enable-auto-commit=true
+
+### offset ???, ????? ???? ??
+# earlistest : ????? ??
+# latest : ?? ????? ??
+# none : ??? ????
+spring.kafka.consumer.auto-offset-reset=earliest
+
+### ???? ?? ?, key/value? ???
+# JSON ???? ?? ???? JsonDeserializer
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+
+### ???? ??? ?, key/value? ????
+# JSON ???? ??? ???? JsonDeserializer
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer

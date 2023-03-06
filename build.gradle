@@ -62,5 +62,6 @@ subprojects {
 project(':app-admin') {
     dependencies {
         implementation project(':conf-api')
+        implementation project(':kafka-producer')
     }
 }
