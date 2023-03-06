@@ -1,0 +1,53 @@
+### kafka servers (default port : 9092)
+spring:
+  kafka:
+    bootstrap-servers: 3.38.245.89:9092, 113.209.64.167:9092, 3.35.14.124:9092
+#    consumer:
+#      group-id: testgroup1
+  #  ### consumer가 한번에 가져오는 message 갯수
+  #  # 1MB 가 채워지거나, 1000개 레코드가 채워지지 않으면 10초 동안 기다려라
+  #spring.kafka.consumer.max-poll-records=500
+  #spring.kafka.consumer.fetch-min-size=1MB
+  #spring.kafka.consumer.fetch-max-wait=5s
+  #
+  #  ### kafka offset 정보 주기적으로 저장
+  #spring.kafka.consumer.enable-auto-commit=true
+  #
+  #  ### offset 오류시, 어디서부터 다시할지 결정
+  #  # earlistest : 맨처음부터 다시
+  #  # latest : 최근 데이터부터 다시
+  #  # none : 정보가 없을경우
+  #spring.kafka.consumer.auto-offset-reset=earliest
+
+
+  ### consumer group id
+#spring.kafka.consumer.group-id=testgroup1
+#
+#  ### Topic Name
+#spring.kafka.template.default-topic=test-topic1
+#
+#  ### consumer가 한번에 가져오는 message 갯수
+#  # 1MB 가 채워지거나, 1000개 레코드가 채워지지 않으면 10초 동안 기다려라
+#spring.kafka.consumer.max-poll-records=500
+#spring.kafka.consumer.fetch-min-size=1MB
+#spring.kafka.consumer.fetch-max-wait=5s
+#
+#  ### kafka offset 정보 주기적으로 저장
+#spring.kafka.consumer.enable-auto-commit=true
+#
+#  ### offset 오류시, 어디서부터 다시할지 결정
+#  # earlistest : 맨처음부터 다시
+#  # latest : 최근 데이터부터 다시
+#  # none : 정보가 없을경우
+#spring.kafka.consumer.auto-offset-reset=earliest
+#
+#  ### 데이터를 보낼 때, key/value를 직렬화
+#  # JSON 데이터를 보낼 것이라면 JsonDeserializer
+#spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+#spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+#
+#  ### 데이터를 받아올 때, key/value를 역직렬화
+#  # JSON 데이터를 받아올 것이라면 JsonDeserializer
+#spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+#spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
