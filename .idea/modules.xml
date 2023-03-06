@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway/demo-event.api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway/demo-event.api-gateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app-admin/demo-event.app-admin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app-admin/demo-event.app-admin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app-notification/demo-event.app-notification.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app-notification/demo-event.app-notification.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service/demo-event.auth-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service/demo-event.auth-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clients-feign/demo-event.clients-feign.main.iml" filepath="$PROJECT_DIR$/.idea/modules/clients-feign/demo-event.clients-feign.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conf-api/demo-event.conf-api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/conf-api/demo-event.conf-api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka-consumer/demo-event.kafka-consumer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka-consumer/demo-event.kafka-consumer.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka-producer/demo-event.kafka-producer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka-producer/demo-event.kafka-producer.main.iml" />
     </modules>
   </component>

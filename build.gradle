@@ -65,3 +65,8 @@ project(':app-admin') {
         implementation project(':kafka-producer')
     }
 }
+project(':app-notification') {
+    dependencies{
+        implementation project(':kafka-consumer')
+    }
+}

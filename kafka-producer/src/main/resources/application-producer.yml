@@ -3,6 +3,9 @@ spring:
   kafka:
     bootstrap-servers: 3.38.245.89:9092, 113.209.64.167:9092, 3.35.14.124:9092
 
+#  b-1.empmskclustertest.2t0us2.c4.kafka.ap-northeast-2.amazonaws.com
+#  b-2.empmskclustertest.2t0us2.c4.kafka.ap-northeast-2.amazonaws.com
+#  b-3.empmskclustertest.2t0us2.c4.kafka.ap-northeast-2.amazonaws.com
 
   #  ### 데이터를 보낼 때, key/value를 직렬화 -> KafkaTemplateConfig에서 설정하였음.
 #  # JSON 데이터를 보낼 것이라면 JsonDeserializer

@@ -1,3 +1,15 @@
+plugins {
+    id 'java-library'
+}
+
+tasks.named("bootJar") {
+    enabled = false
+}
+tasks.named("jar") {
+    enabled = true
+}
+
 dependencies {
-    implementation 'org.springframework.kafka:spring-kafka'
+    api 'org.springframework.kafka:spring-kafka'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
