@@ -12,6 +12,7 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
@@ -24,11 +25,10 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     private final KafkaProperties kafkaProperties;
-//    private final KafkaConsumerProperties kafkaConsumerProperties;
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer,String>> kafkaListenerContainerFactory(){
-        ConcurrentKafkaListenerContainerFactory<Integer,String> factory
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Object>> kafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
 //        Consuming Thread 갯수 세팅. @KafkaListener에서 동적으로 관리 가능할듯.
@@ -37,13 +37,14 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<Integer,String> consumerFactory() {
+    public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
+
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
 //        @KafkaListener에서 직접 그룹아이디 설정하는게 나을듯.
 //        config.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaProperties.getGroupId());
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
         return new DefaultKafkaConsumerFactory<>(config);
     }

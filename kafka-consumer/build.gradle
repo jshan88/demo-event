@@ -12,4 +12,5 @@ tasks.named("jar") {
 dependencies {
     api 'org.springframework.kafka:spring-kafka'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
 }

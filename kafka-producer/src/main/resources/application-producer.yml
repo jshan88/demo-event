@@ -1,7 +1,7 @@
 ### kafka servers (default port : 9092)
 spring:
   kafka:
-    bootstrap-servers: 3.38.245.89:9092, 113.209.64.167:9092, 3.35.14.124:9092
+    bootstrap-servers: localhost:9092
 
 #  b-1.empmskclustertest.2t0us2.c4.kafka.ap-northeast-2.amazonaws.com
 #  b-2.empmskclustertest.2t0us2.c4.kafka.ap-northeast-2.amazonaws.com

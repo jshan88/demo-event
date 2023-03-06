@@ -16,16 +16,16 @@ public class KafkaProducer {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public void produceMessage(String topic, Object payload){
-        log.info("produce message starts...");
+        log.info("##### produce message starts...");
         ListenableFuture<SendResult<String, Object>> listenableFuture = kafkaTemplate.send(topic, payload);
         listenableFuture.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
             @Override
             public void onFailure(Throwable ex) {
-                log.error("error : " + ex.getMessage());
+                log.error("error : {}", ex.getMessage());
             }
             @Override
             public void onSuccess(SendResult<String, Object> result) {
-                log.info("message sent : offset - " + result.getRecordMetadata().offset());
+                log.info("##### message sent : offset - {}", result.getRecordMetadata().offset());
             }
         });
     }

@@ -1,7 +1,7 @@
 ### kafka servers (default port : 9092)
 spring:
   kafka:
-    bootstrap-servers: 3.38.245.89:9092, 113.209.64.167:9092, 3.35.14.124:9092
+    bootstrap-servers: localhost:9092
 #    consumer:
 #      group-id: testgroup1
   #  ### consumer가 한번에 가져오는 message 갯수
