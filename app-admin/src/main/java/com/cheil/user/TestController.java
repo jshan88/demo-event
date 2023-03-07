@@ -15,7 +15,7 @@ public class TestController {
 
     private final KafkaProducer kafkaProducer;
 
-    @PostMapping
+    @PostMapping(path = "/Object")
     public void testKafka(@RequestBody UserJoinRequest userJoinRequest){
         kafkaProducer.produceMessage("test-topic1", userJoinRequest);
     }

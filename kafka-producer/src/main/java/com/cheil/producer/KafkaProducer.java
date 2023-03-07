@@ -16,7 +16,7 @@ public class KafkaProducer {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public void produceMessage(String topic, Object payload){
-        log.info("##### produce message starts...");
+        log.info("##### (OBJECT) produce message starts...");
         ListenableFuture<SendResult<String, Object>> listenableFuture = kafkaTemplate.send(topic, payload);
         listenableFuture.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
             @Override
