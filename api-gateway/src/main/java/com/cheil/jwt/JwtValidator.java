@@ -1,20 +1,14 @@
 package com.cheil.jwt;
 
-import static io.jsonwebtoken.security.Keys.*;
+import static io.jsonwebtoken.security.Keys.hmacShaKeyFor;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import java.security.Key;
-import java.util.Date;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -33,24 +27,19 @@ public class JwtValidator {
     }
 
     public Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
-    }
-
-    public String getUserName(String token) {
-        return getAllClaimsFromToken(token).getSubject();
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
     public String getRole(String token) {
         return getAllClaimsFromToken(token).get("role").toString();
     }
 
-    public boolean validateJwt(String token) {
+    public void validateJwt(String token) {
         try {
-            Jwts.parser().setSigningKey(key).parseClaimsJws(token);
-        } catch (UnsupportedJwtException | MalformedJwtException | SignatureException
-                 | IllegalArgumentException | ExpiredJwtException jwtException) {
-            return false;
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+        } catch (UnsupportedJwtException | MalformedJwtException | SignatureException |
+                 IllegalArgumentException | ExpiredJwtException jwtException) {
+            throw jwtException;
         }
-        return true;
     }
 }

@@ -1,4 +1,0 @@
-jwt:
-  secretKey: secretkeyshouldbesecured
-  tokenPrefix: Bearer
-  tokenExpirationPeriod: 14
