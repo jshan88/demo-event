@@ -42,7 +42,7 @@ public class AuthenticationFilter extends
             String token = getToken(request);
 
             // validateJwt() 에서 Exception 발생 시, error exception handler 통해 응답하는 것으로 수정
-            // Unathorized는 제외. (onError에서 처리함.)
+            // Unauthorized 는 제외. (onError 에서 처리함.)
             jwtValidator.validateJwt(token);
 
             // APP-MEMBERSHIP 이랑 타 어플리케이션 구분하기 위해 일단 넣어둠.
@@ -82,5 +82,4 @@ public class AuthenticationFilter extends
             .header("role", String.valueOf(claims.get("role")))
             .build();
     }
-
 }

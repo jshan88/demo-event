@@ -1,0 +1,4 @@
+jwt:
+  secretKey: 82eac5eeb476a51cd69d7e00d51021d54c5cdc063c6eed81a6651c47c0c18979
+  tokenPrefix: Bearer
+  tokenExpirationPeriodInDays: 14

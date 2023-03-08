@@ -16,14 +16,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtValidator {
 
+
+    //TODO : secretkey, tokenPrefix는 JwtConfig 같은걸로 빼서 구현하자.
     @Value("${jwt.secretKey}")
-    private String secret;
+    private String secretKey;
+
 
     private Key key;
 
+    //TODO : Secret Key도 @Bean으로 빼는게 나을듯. 해당 클래스 @Configuration으로 잡고.
     @PostConstruct
     public void init() {
-        this.key = hmacShaKeyFor(secret.getBytes());
+        this.key = hmacShaKeyFor(secretKey.getBytes());
     }
 
     public Claims getAllClaimsFromToken(String token) {
