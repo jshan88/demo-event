@@ -9,6 +9,7 @@
         </processorPath>
         <module name="demo-event.app-admin.main" />
         <module name="demo-event.clients-feign.main" />
+        <module name="demo-event.app-membership.main" />
         <module name="demo-event.app-notification.main" />
         <module name="demo-event.api-gateway.main" />
         <module name="demo-event.conf-api.main" />

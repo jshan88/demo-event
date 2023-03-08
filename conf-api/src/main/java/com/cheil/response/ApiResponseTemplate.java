@@ -5,6 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
+
+/**
+ * !주의 : 해당 템플릿 수정 시, API Gateway의 익셉션 핸들링 소스 내 템플릿도 함께 수정한다.
+ * ?이유 : Spring GW는 flux 기반이라 spring mvc에서 만든 익셉션 핸들러 사용 못함.
+ *
+ * @author      : jshan
+ * @created     : 2023/03/08
+ */
 @Getter
 @NoArgsConstructor
 public class ApiResponseTemplate<T> {

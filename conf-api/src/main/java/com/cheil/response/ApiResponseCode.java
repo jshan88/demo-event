@@ -7,6 +7,11 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum ApiResponseCode {
+
+    // 404 ERROR
+
+    // ...
+
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "No User Found for the given parameters"),
     USER_EXIST(HttpStatus.CONFLICT, "User already exist");
     private final HttpStatus httpStatus;

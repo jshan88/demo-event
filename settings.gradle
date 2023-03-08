@@ -7,4 +7,5 @@ include 'clients-feign'
 include 'kafka-producer'
 include 'kafka-consumer'
 include 'app-notification'
+include 'app-membership'
 

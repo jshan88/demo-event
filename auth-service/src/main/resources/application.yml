@@ -1,5 +1,4 @@
-application:
-  jwt:
-    secretKey: jinseokhanjinseokhansecuresecure
-    tokenPrefix: Bearer
-    tokenExpirationPeriod: 14
+jwt:
+  secretKey: secretkeyshouldbesecured
+  tokenPrefix: Bearer
+  tokenExpirationPeriod: 14
