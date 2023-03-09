@@ -1,5 +1,6 @@
 package com.cheil.filter;
 
+import com.cheil.jwt.JwtConfig;
 import com.cheil.jwt.JwtValidator;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +19,16 @@ import reactor.core.publisher.Mono;
 public class AuthenticationFilter extends
     AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
+    private final JwtConfig jwtConfig;
     private final JwtValidator jwtValidator;
 
     static class Config {
+        // 나중에 프로퍼티 값들 여기서
     }
 
-    public AuthenticationFilter(JwtValidator jwtValidator) {
+    public AuthenticationFilter(JwtConfig jwtConfig, JwtValidator jwtValidator) {
         super(Config.class);
+        this.jwtConfig = jwtConfig;
         this.jwtValidator = jwtValidator;
     }
 
@@ -46,7 +50,9 @@ public class AuthenticationFilter extends
             jwtValidator.validateJwt(token);
 
             // APP-MEMBERSHIP 이랑 타 어플리케이션 구분하기 위해 일단 넣어둠.
-            if (!jwtValidator.getRole(token).contains("admin")) {
+            // 프로퍼티에서 이거 태우냐 마냐에 대해 각 서비스별로 argument 받아서,
+            // config 에 넣고 처리하는 걸로 변경해도 될듯. (ex. isAccessible?)
+            if (!jwtValidator.getAuthorities(token).contains("admin")) {
                 return onError(exchange, "Admin 권한 없음");
             }
 
@@ -70,7 +76,7 @@ public class AuthenticationFilter extends
 
     private String getToken(ServerHttpRequest request) {
         return request.getHeaders().getOrEmpty(HttpHeaders.AUTHORIZATION).get(0)
-            .replace("Bearer", "");
+            .replace(jwtConfig.getTokenPrefix(), "");
     }
 
     /// API Gateway에서 권한 분기 부족한 부분이 있을 수 있음.
@@ -79,7 +85,7 @@ public class AuthenticationFilter extends
         Claims claims = jwtValidator.getAllClaimsFromToken(token);
         exchange.getRequest().mutate()
             .header("username", claims.getSubject())
-            .header("role", String.valueOf(claims.get("role")))
+            .header("authorities", String.valueOf(claims.get("authorities")))
             .build();
     }
 }

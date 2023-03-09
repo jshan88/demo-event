@@ -72,7 +72,7 @@ public class ApiGWExceptionHandler implements ErrorWebExceptionHandler {
             apiGWResponseTemplate = ApiGWResponseTemplate.builder().returnCode("ERROR")
                 .returnMessage("Invalid Token").build();
         } else {
-            serverHttpResponse.setStatusCode(serverHttpResponse.getStatusCode());
+            serverHttpResponse.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
             apiGWResponseTemplate = ApiGWResponseTemplate.builder().returnCode("ERROR")
                 .returnMessage(ex.getMessage()).build();
         }

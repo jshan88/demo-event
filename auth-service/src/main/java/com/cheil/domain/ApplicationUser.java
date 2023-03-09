@@ -1,6 +1,5 @@
-package com.cheil.user.domain;
+package com.cheil.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,28 +9,33 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * !!!Description here
+ *
+ * @author : jshan
+ * @created : 2023/03/09
+ */
 @Table(name = "users")
 @Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class ApplicationUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String email;
-
+    private String password;
     private String firstName;
-
     private String lastName;
-
-    private String role;
+    private String role; //나중에 필요하면 리스트로. (1:N)
 
     @Builder
-    public User(String email, String firstName, String lastName, String role) {
+    public ApplicationUser(String email, String password, String firstName, String lastName,
+        String role) {
         this.email = email;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
