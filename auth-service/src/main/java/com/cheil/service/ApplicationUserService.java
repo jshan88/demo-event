@@ -22,10 +22,9 @@ public class ApplicationUserService implements UserDetailsService {
     private final ApplicationUserRepository applicationUserRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         ApplicationUser applicationUser = applicationUserRepository.findByEmail(username)
-            .orElseThrow(
-                () -> new RuntimeException("Member Not Found."));   /// 이거 API CONFIG 데려와서 해.
+            .orElseThrow(() -> new UsernameNotFoundException("Username(email) not found."));
 
         return new ApplicationUserDetails(applicationUser);
     }

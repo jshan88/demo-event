@@ -7,12 +7,11 @@ import com.cheil.user.dto.UserGetParam;
 import com.cheil.user.dto.UserJoinRequest;
 import com.cheil.user.dto.UserResponse;
 import com.cheil.user.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -42,7 +41,7 @@ public class UserService {
         try {
             userRepository.save(user);
         }catch(DataIntegrityViolationException e){
-            throw new ApiException(ApiResponseCode.USER_EXIST);
+            throw new ApiException(ApiResponseCode.USER_ALREADY_EXIST);
         }
         return toUserResponse(user);
     }

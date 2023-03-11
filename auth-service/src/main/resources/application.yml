@@ -15,14 +15,13 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-  logging:
-    level:
-      org:
-        hibernate:
-          #        SQL: debug
-          type: trace
-
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
 jwt:
   secretKey: 82eac5eeb476a51cd69d7e00d51021d54c5cdc063c6eed81a6651c47c0c18979
-  tokenPrefix: Bearer
+  tokenPrefix: "Bearer "
   tokenExpirationPeriodInDays: 14

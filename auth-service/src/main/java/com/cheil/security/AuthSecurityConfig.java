@@ -1,4 +1,4 @@
-package com.cheil.sercurity;
+package com.cheil.security;
 
 import com.cheil.jwt.JwtConfig;
 import com.cheil.jwt.JwtUsernamePasswordAuthenticationFilter;
@@ -8,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -30,18 +31,17 @@ public class AuthSecurityConfig {
     private final SecretKey secretKey;
     private final PasswordEncoder passwordEncoder;
     private final ApplicationUserService applicationUserService;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        //1111
-        AuthenticationManager authenticationManager =
-            authenticationManager(http.getSharedObject(AuthenticationConfiguration.class));
-
         JwtUsernamePasswordAuthenticationFilter jwtUsernamePasswordAuthenticationFilter
-            = new JwtUsernamePasswordAuthenticationFilter(authenticationManager, jwtConfig,
+            = new JwtUsernamePasswordAuthenticationFilter(authenticationManager(), jwtConfig,
             secretKey);
         jwtUsernamePasswordAuthenticationFilter.setFilterProcessesUrl("/auth/login");
+        jwtUsernamePasswordAuthenticationFilter.setAuthenticationFailureHandler(
+            customAuthenticationFailureHandler);
 
         http
             .csrf().disable()
@@ -49,10 +49,8 @@ public class AuthSecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .addFilter(jwtUsernamePasswordAuthenticationFilter)
-//            .addFilterAfter(new JwtValidator(secretKey, jwtConfig), JwtUsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
-            .anyRequest()
-            .authenticated();
+            .anyRequest().authenticated();
 
         return http.build();
 
@@ -71,18 +69,12 @@ public class AuthSecurityConfig {
 
     }
 
-    //1111
     @Bean
-    public AuthenticationManager authenticationManager(
-        AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        daoAuthenticationProvider.setUserDetailsService(applicationUserService);
+        daoAuthenticationProvider.setHideUserNotFoundExceptions(false);
+        return new ProviderManager(daoAuthenticationProvider);
     }
-
-//    @Bean
-//    public AuthenticationManager authenticationManager() {
-//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-//        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-//        daoAuthenticationProvider.setUserDetailsService(applicationUserService);
-//        return new ProviderManager(daoAuthenticationProvider);
-//    }
 }

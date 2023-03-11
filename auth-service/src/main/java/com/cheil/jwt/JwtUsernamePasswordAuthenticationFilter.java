@@ -1,5 +1,6 @@
 package com.cheil.jwt;
 
+import com.cheil.dto.AuthResponseTemplate;
 import com.cheil.dto.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @author : jshan
  * @created : 2023/03/08
  */
+@Slf4j
 @RequiredArgsConstructor
 public class JwtUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -43,12 +46,10 @@ public class JwtUsernamePasswordAuthenticationFilter extends UsernamePasswordAut
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 loginRequest.getUsername(), loginRequest.getPassword());
 
-            Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
-            return authentication;
+            return authenticationManager.authenticate(authenticationToken);
 
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -69,5 +70,9 @@ public class JwtUsernamePasswordAuthenticationFilter extends UsernamePasswordAut
             .compact();
 
         response.addHeader(HttpHeaders.AUTHORIZATION, jwtConfig.getTokenPrefix() + jwt);
+        response.setContentType("application/json");
+
+        new ObjectMapper().writeValue(response.getOutputStream(),
+            AuthResponseTemplate.createSuccessResponse(null));
     }
 }

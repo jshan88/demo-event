@@ -17,17 +17,6 @@ public class JwtValidator {
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
 
-    //TODO : secretkey, tokenPrefix는 JwtConfig 같은걸로 빼서 구현하자.
-//    @Value("${jwt.secretKey}")
-//    private String secretKey;
-
-//    //TODO : Secret Key도 @Bean으로 빼는게 나을듯. 해당 클래스 @Configuration으로 잡고.
-//    private Key key;
-//    @PostConstruct
-//    public void init() {
-//        this.key = hmacShaKeyFor(secretKey.getBytes());
-//    }
-
     public Claims getAllClaimsFromToken(String token) {
         return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token)
             .getBody();
@@ -37,6 +26,7 @@ public class JwtValidator {
         return getAllClaimsFromToken(token).get("authorities").toString();
     }
 
+    //TODO: 이거 필요 여부 다시 확인. ApiGWExceptionHandler 가 얘 없이도 익셉션 캐치 하는지 확인.
     public void validateJwt(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);

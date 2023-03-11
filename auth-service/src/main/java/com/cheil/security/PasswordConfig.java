@@ -1,4 +1,4 @@
-package com.cheil.sercurity;
+package com.cheil.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
